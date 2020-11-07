@@ -1346,7 +1346,7 @@ static void _classdriver_process_device(usbh_device_t *dev) {
 	if (_classdriver_load(dev, (uint8_t *)devdesc, USBH_DT_DEVICE_SIZE) != HAL_SUCCESS) {
 		udevinfo("No drivers found for device.");
 
-		if (devdesc->bDeviceClass == 0) {
+		if (devdesc->bDeviceClass == 0 || (devdesc->bDeviceClass == 0xef && devdesc->bDeviceSubClass == 0x02)) {
 			/* each interface defines its own device class/subclass/protocol */
 			udevinfo("Try load a driver for each IF.");
 
